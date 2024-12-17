@@ -1,5 +1,5 @@
-If (-NOT (Test-Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -and (Get-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System').EnableLUA -eq 0)) {
-    Start-Process powershell -ArgumentList "-NoExit", "-Command & {<YourScriptHere>}" -Verb RunAs
+If (-NOT [System.Security.Principal.WindowsIdentity]::GetCurrent().IsSystem) {
+    Start-Process powershell -ArgumentList "-NoExit", "-Command & { $MyInvocation.MyCommand.Path }" -Verb RunAs
     Exit
 }
 
