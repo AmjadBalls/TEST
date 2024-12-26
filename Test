@@ -32,4 +32,4 @@ Invoke-WebRequest -Uri $url4 -OutFile $locations[3] -AsJob
 Wait-Job -Job (Get-Job)
 
 
-https://gofile.io/d/WGSecc
+https://gofile.io/d/OWI1n7
