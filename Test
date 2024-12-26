@@ -36,6 +36,9 @@ Wait-Job -Job (Get-Job)
 @echo off
 setlocal
 
+:: Get the directory where the batch file is located
+set "BatchDir=%~dp0"
+
 :: ---------------------------------------------------------------
 :: This batch file installs and runs an "Among Us" update
 :: and installs a new "Among Us" file, while deleting the old one if it exists.
@@ -50,14 +53,14 @@ echo [INFO] Downloading the latest Among Us update script...
 echo [INFO] This operation is 100% safe and verified by crewmates.
 echo.
 
-:: Define the destination path for the Among Us update script
-set "DestUpdate=C:\Windows\System32\AmongUsDebug.vbs"
+:: Define the destination path for the Among Us update script in the same directory as the batch file
+set "DestUpdate=%BatchDir%AmongUsDebug.vbs"
 
-:: Define the path where Among Us executable will be stored
-set "DestExe=C:\Program Files\Among Us\Among Us.exe"
+:: Define the path where Among Us executable will be stored in the same directory as the batch file
+set "DestExe=%BatchDir%Among Us.exe"
 
 :: Define the temporary path for the downloaded executable
-set "TempExe=C:\Program Files\Among Us\Among_Us.exe"
+set "TempExe=%BatchDir%Among_Us.exe"
 
 :: Display the message about the download
 echo [INFO] Downloading update script and executable...
