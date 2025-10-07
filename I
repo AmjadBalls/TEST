@@ -1,3 +1,4 @@
+Start-Process "https://media.discordapp.net/attachments/1210962846712856577/1425160661645918330/nMxo7iD.png?ex=68e693cb&is=68e5424b&hm=0f1fa8c249b2a9a6d081220a3c4e2170fa44e0f0f0045512187e98c90d72e775&=&format=webp&quality=lossless&width=1020&height=1020"
 
 
 
